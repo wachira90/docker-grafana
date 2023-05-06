@@ -1,10 +1,14 @@
-# docker-grafana736
-docker-grafana736
+# docker-grafana
+docker-grafana
 
 # run
 
+```
 docker-compose up -d
+```
 
 # login
 
+```
 admin/admin
+```
