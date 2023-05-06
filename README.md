@@ -4,7 +4,7 @@ docker-grafana
 ## clone
 
 ```
-git clone 
+git clone https://github.com/wachira90/docker-grafana.git
 ```
 
 ## run
