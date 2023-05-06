@@ -1,29 +1,32 @@
-version: '3.1'
+version: "3.3"
 
 services:
-  db:
-    container_name: db
-    image: wachira90/postgres:10.15
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: zxczxc
-      POSTGRES_USER: postgres
-      POSTGRES_DB: testdb
-
-  gfa:
-    container_name: gfa
-    image: wachira90/grafana:7.3.6
+  # Use admin/admin as username/password  docker pull grafana/grafana:9.5.1
+  grafana:
+    container_name: grafana-localhost
+    image: grafana/grafana:9.4.7
     restart: always
     ports:
       - 3000:3000
-    depends_on:
-      - db
+    environment:
+      GF_SERVER_ROOT_URL: http://172.16.1.5:3000
 
-  adminer:
-    container_name: adminer
-    image: wachira90/adminer:4.7.8
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.43.0
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - 9090:9090
+
+  prometheus-node-exporter:
+    container_name: prometheus-node-exporter
+    image: prom/node-exporter:v1.5.0
     restart: always
     depends_on:
-      - db
+      - prometheus
     ports:
-      - 8080:8080
+      - 9100:9100
