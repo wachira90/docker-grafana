@@ -4,7 +4,8 @@ services:
   # Use admin/admin as username/password  docker pull grafana/grafana:9.5.1
   grafana:
     container_name: grafana-localhost
-    image: grafana/grafana:9.4.7
+    image: grafana/grafana:10.1.0
+#    image: grafana/grafana:9.4.7
     restart: always
     ports:
       - 3000:3000
