@@ -5,6 +5,8 @@
 ```
 git clone https://github.com/wachira90/docker-grafana.git
 
+cd docker-grafana
+
 mkdir grafana-data prometheus-data
 
 sudo chmod -R  0777 grafana-data prometheus-data
