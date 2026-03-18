@@ -1,33 +1,35 @@
-version: "3.3"
-
 services:
   # Use admin/admin as username/password  docker pull grafana/grafana:9.5.1
   grafana:
-    container_name: grafana-localhost
+    container_name: grafana
     image: grafana/grafana:10.1.0
-#    image: grafana/grafana:9.4.7
+    # image: grafana/grafana:9.4.7
     restart: always
+    volumes:
+      - ./grafana-data/:/var/lib/grafana/:rw
     ports:
       - 3000:3000
     environment:
-      GF_SERVER_ROOT_URL: http://172.16.1.5:3000
+      GF_SERVER_ROOT_URL: http://192.168.250.146:3000
 
   prometheus:
     container_name: prometheus
     image: prom/prometheus:v2.43.0
     restart: always
     volumes:
+      - ./prometheus-data/:/data/:rw
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/data"
     ports:
       - 9090:9090
 
-  prometheus-node-exporter:
-    container_name: prometheus-node-exporter
-    image: prom/node-exporter:v1.5.0
-    restart: always
-    depends_on:
-      - prometheus
-    ports:
-      - 9100:9100
+  # prometheus-node-exporter:
+  #   container_name: prometheus-node-exporter
+  #   image: prom/node-exporter:v1.5.0
+  #   restart: always
+  #   depends_on:
+  #     - prometheus
+  #   ports:
+  #     - 9100:9100
