@@ -4,6 +4,10 @@
 
 ```
 git clone https://github.com/wachira90/docker-grafana.git
+
+mkdir grafana-data prometheus-data
+
+sudo chmod -R  0777 grafana-data prometheus-data
 ```
 
 ## Run
