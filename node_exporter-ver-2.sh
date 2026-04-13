@@ -3,7 +3,8 @@
 set -e
 
 # Variables
-VERSION="1.9.1"
+# VERSION="1.9.1"
+VERSION="1.11.1"
 USER="node_exporter"
 INSTALL_DIR="/usr/local/bin"
 SERVICE_FILE="/etc/systemd/system/node_exporter.service"
