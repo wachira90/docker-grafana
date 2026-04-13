@@ -59,3 +59,25 @@ services:
 
 https://www.influxdata.com/blog/getting-started-influxdb-grafana/
 
+## start prometheus
+
+```sh
+#!/bin/bash
+docker run -d \
+    --name=prometheus \
+    --restart=unless-stopped \
+    -p 9090:9090 \
+    -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+    -v $(pwd)/web.config.yml:/etc/prometheus/web.config.yml \
+    -v $(pwd)/prometheus-data:/prometheus \
+    prom/prometheus:v2.53.5 \
+    --config.file=/etc/prometheus/prometheus.yml \
+    --storage.tsdb.retention.size=8GB \
+    --storage.tsdb.path=/prometheus \
+    --web.config.file=/etc/prometheus/web.config.yml \
+    --web.enable-remote-write-receiver \
+    --log.level=debug
+```
+
+    
+
